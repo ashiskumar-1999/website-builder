@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   Icon,
@@ -10,6 +10,7 @@ import {
 import { RxText } from "react-icons/rx";
 import { CiImageOn, CiVideoOn } from "react-icons/ci";
 import ElementsPanel from "./ElementsPanel";
+import TextBlock from "./TextBlock";
 
 const Buttons = [
   {
@@ -34,6 +35,8 @@ const SideBar = ({ onClick }: { onClick?: () => void }) => {
     onOpen: onPanelOpen,
     onClose: onPanelClose,
   } = useDisclosure();
+  const [buttonText, setButtonText] = useState("");
+  console.log("Active Block", buttonText);
   return (
     <>
       <VStack h="100vh" px={1} py={20} bgColor="black" spacing={5}>
@@ -49,13 +52,25 @@ const SideBar = ({ onClick }: { onClick?: () => void }) => {
             color="gray"
             _hover={{ color: "white" }}
             _focus={{ bgColor: "gray.800", color: "white" }}
-            onClick={onPanelOpen}
+            onClick={() => {
+              onPanelOpen();
+              setButtonText(button.label);
+            }}
           >
             <Icon as={button.icon} />
             <Text>{button.label}</Text>
           </Button>
         ))}
       </VStack>
+      {buttonText === "Text" ? (
+        <ElementsPanel isPanelOpen={isPanelOpen} onPanelClose={onPanelClose}>
+          <TextBlock id="1" text="Add a Heading" onDragStart={onPanelClose} />
+        </ElementsPanel>
+      ) : (
+        <ElementsPanel isPanelOpen={isPanelOpen} onPanelClose={onPanelClose}>
+          "Go to Text"
+        </ElementsPanel>
+      )}
     </>
   );
 };
