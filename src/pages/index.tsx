@@ -5,15 +5,18 @@ import CodeCanvas from "@/components/CodeCanvas";
 import { Box, Button, Flex, VStack } from "@chakra-ui/react";
 
 export default function Home() {
-  const [pages, setPages] = useState([{ page: <CodeCanvas /> }]);
+  const [pages, setPages] = useState<{ id: number }[]>([{ id: 1 }]);
   const handleAddPage = () => {
-    setPages(() => [...pages]);
+    setPages([...pages, { id: pages.length + 1 }]);
   };
   return (
     <LayOut>
       <SideBar />
       <VStack direction="column" w="full" p={3} justifyContent="center">
-        <CodeCanvas />
+        {pages.map((page) => (
+          <CodeCanvas key={page.id} />
+        ))}
+
         <Button
           bgColor="green.300"
           color="black"
