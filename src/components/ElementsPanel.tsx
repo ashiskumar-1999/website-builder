@@ -1,4 +1,4 @@
-import React, { Children, ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { Drawer, DrawerContent, DrawerOverlay } from "@chakra-ui/react";
 
 type PanelProp = {
@@ -10,7 +10,7 @@ const ElementsPanel = ({ isPanelOpen, onPanelClose, children }: PanelProp) => {
   return (
     <Drawer isOpen={isPanelOpen} placement="left" onClose={onPanelClose}>
       <DrawerOverlay />
-      <DrawerContent>{children}</DrawerContent>
+      <DrawerContent p={3}>{children}</DrawerContent>
     </Drawer>
   );
 };

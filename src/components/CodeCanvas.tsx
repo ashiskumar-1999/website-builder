@@ -1,4 +1,4 @@
-import { Box, Input } from "@chakra-ui/react";
+import { Card, Input } from "@chakra-ui/react";
 import React, { useRef, useState } from "react";
 import { useDrop } from "react-dnd";
 
@@ -34,24 +34,17 @@ const Canvas = () => {
 
   drop(canvasRef);
   return (
-    <Box
-      ref={canvasRef}
-      w="100%"
-      h="500px"
-      m={10}
-      p={10}
-      border="1px solid"
-      borderRadius="3xl"
-    >
+    <Card ref={canvasRef} w="90%" h="500px" m={10} p={10} borderRadius="xl">
       {inputs.map((data: any) => (
         <Input
           my={1}
           id={data.id}
+          defaultValue={data.text}
           value={data.value}
           onChange={(e: any) => setValue(e.target.value)}
         />
       ))}
-    </Box>
+    </Card>
   );
 };
 
