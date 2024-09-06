@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <LayOut>
       <SideBar />
-      <VStack direction="column" w="full" p={3} justifyContent="center">
+      <VStack w="full" p={3} justifyContent="center" overflowY="scroll">
         {pages.map((page) => (
           <CodeCanvas key={page.id} />
         ))}

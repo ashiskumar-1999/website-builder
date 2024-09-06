@@ -29,7 +29,7 @@ const Buttons = [
     icon: CiVideoOn,
   },
 ];
-const SideBar = ({ onClick }: { onClick?: () => void }) => {
+const SideBar = () => {
   const {
     isOpen: isPanelOpen,
     onOpen: onPanelOpen,
@@ -39,7 +39,16 @@ const SideBar = ({ onClick }: { onClick?: () => void }) => {
   console.log("Active Block", buttonText);
   return (
     <>
-      <VStack h="100vh" px={1} py={20} bgColor="black" spacing={5}>
+      <VStack
+        h="100vh"
+        px={1}
+        py={20}
+        bgColor="black"
+        spacing={5}
+        top={0}
+        position="sticky"
+        overflow="hidden"
+      >
         {Buttons.map((button) => (
           <Button
             variant="ghost"

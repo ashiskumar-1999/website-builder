@@ -1,8 +1,12 @@
 import React, { ReactNode } from "react";
-import { HStack } from "@chakra-ui/react";
+import { Flex, HStack } from "@chakra-ui/react";
 
 const LayOut = ({ children }: { children: ReactNode }) => {
-  return <HStack bgColor="gray.200">{children}</HStack>;
+  return (
+    <Flex flexDirection="row" bgColor="gray.200">
+      {children}
+    </Flex>
+  );
 };
 
 export default LayOut;
