@@ -22,7 +22,6 @@ const Canvas = () => {
 
   const [inputs, setInputs] = useState<any>([]);
   const [value, setValue] = useState();
-  console.log("Input field:", inputs);
 
   const handleDrop = (item: any) => {
     setInputs((prevInputs: any) => [

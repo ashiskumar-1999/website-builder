@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   Button,
   Icon,
+  Image,
   Input,
   Text,
   useDisclosure,
@@ -29,6 +30,11 @@ const Buttons = [
     icon: CiVideoOn,
   },
 ];
+
+type ImageProp = {
+  id: number;
+  url: string;
+};
 const SideBar = () => {
   const {
     isOpen: isPanelOpen,
@@ -36,7 +42,25 @@ const SideBar = () => {
     onClose: onPanelClose,
   } = useDisclosure();
   const [buttonText, setButtonText] = useState("");
-  console.log("Active Block", buttonText);
+  const [image, setImage] = useState<ImageProp[]>([]);
+
+  const handleUploadImage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: ProgressEvent<FileReader>) => {
+        const imageURL = e.target?.result as string;
+        const newImage: ImageProp = {
+          id: new Date().getTime(),
+          url: imageURL,
+        };
+        setImage([...image, newImage]);
+        console.log("imageURL", imageURL);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <>
       <VStack
@@ -75,9 +99,16 @@ const SideBar = () => {
         <ElementsPanel isPanelOpen={isPanelOpen} onPanelClose={onPanelClose}>
           <TextBlock id="1" text="Add a Heading" onDragStart={onPanelClose} />
         </ElementsPanel>
+      ) : buttonText === "Image" ? (
+        <ElementsPanel isPanelOpen={isPanelOpen} onPanelClose={onPanelClose}>
+          <Input type="file" onChange={handleUploadImage} placeholder="" />
+          {image.map((imageData) => (
+            <Image key={imageData.id} src={imageData.url} />
+          ))}
+        </ElementsPanel>
       ) : (
         <ElementsPanel isPanelOpen={isPanelOpen} onPanelClose={onPanelClose}>
-          "Go to Text"
+          "This Panel needs to be added."
         </ElementsPanel>
       )}
     </>
