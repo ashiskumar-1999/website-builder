@@ -11,7 +11,8 @@ import {
 import { RxText } from "react-icons/rx";
 import { CiImageOn, CiVideoOn } from "react-icons/ci";
 import ElementsPanel from "./ElementsPanel";
-import TextBlock from "./TextBlock";
+import TextBlock from "./DraggableComponents/TextBlock";
+import ImageBlock from "./DraggableComponents/ImageBlock";
 
 const Buttons = [
   {
@@ -55,7 +56,6 @@ const SideBar = () => {
           url: imageURL,
         };
         setImage([...image, newImage]);
-        console.log("imageURL", imageURL);
       };
       reader.readAsDataURL(file);
     }
@@ -103,7 +103,11 @@ const SideBar = () => {
         <ElementsPanel isPanelOpen={isPanelOpen} onPanelClose={onPanelClose}>
           <Input type="file" onChange={handleUploadImage} placeholder="" />
           {image.map((imageData) => (
-            <Image key={imageData.id} src={imageData.url} />
+            <ImageBlock
+              key={imageData.id}
+              url={imageData.url}
+              onDragStart={onPanelClose}
+            />
           ))}
         </ElementsPanel>
       ) : (

@@ -3,7 +3,6 @@ import { Button } from "@chakra-ui/react";
 import { useDrag } from "react-dnd";
 
 const ItemTypes = {
-  TEXT: "text",
   BUTTON: "button",
 };
 
